@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{{ name }}'s Player Page</title>
+        <!-- Add any additional styles or links to CDN here -->
+    
+        <!-- Dark Mode Styles -->
+        <style>
+            body {
+                background-color: #343a40; /* Set default background color for dark mode */
+                color: #ffffff; /* Set default text color for dark mode */
+            }
+    
+            a {
+                color: #ADD8E6; /* Set link color in dark mode */
+            }
+    
+            /* Add more styles for dark mode as needed */
+        </style>
+    </head>
+<body>
+    <a href="{{ url_for('index') }}"> <<< Back to Squad Page</a>
+    <h1>{{ name }}'s Player Page</h1>
+    <p>Nationality: {{ player_df['Nat'].values[0] }}</p>
+    <p>Age: {{ player_df['Age'].values[0] }}</p>
+    <p>Transfer Value: {{ player_df['Transfer Value'].values[0] }}</p>
+    <p>Personality / Media Handling: {{ player_df['Personality'].values[0] }} / {{ player_df['Media Handling'].values[0] }}</p>
+    <p>Left Foot / Right Foot: {{ player_df['Left Foot'].values[0] }} / {{ player_df['Right Foot'].values[0] }}</p>
+    <p>Average Rating: {{ player_df['Av Rat'].values[0] }}</p>
+    <p>Appearances / minutes: {{ player_df['Apps'].values[0] }} / {{ player_df['Mins'].values[0] }}</p>
+    <p>Goals in season (and npXG per 90): {{ player_df['Gls'].values[0] }} ({{ player_df['NP-xG/90'].values[0] }})</p>
+    <p>Assists in season (and xA per 90): {{ player_df['Ast'].values[0] }} ({{ player_df['xA/90'].values[0] }})</p>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Technical</th>
+                <th></th>
+                <th>Mental</th>
+                <th></th>
+                <th>Physical</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Corners</td>
+                <td>{{ player_df['Cor'].values[0] }}</td>
+                <td>Aggression</td>
+                <td>{{ player_df['Agg'].values[0] }}</td>
+                <td>Acceleration</td>
+                <td>{{ player_df['Acc'].values[0] }}</td>
+            </tr>
+            <tr>
+                <td>Crossing</td>
+                <td>{{ player_df['Cro'].values[0] }}</td>
+                <td>Anticipation</td>
+                <td>{{ player_df['Ant'].values[0] }}</td>
+                <td>Agility</td>
+                <td>{{ player_df['Agi'].values[0] }}</td>
+            </tr>
+            <tr>
+                <td>Dribbling</td>
+                <td>{{ player_df['Dri'].values[0] }}</td>
+                <td>Bravery</td>
+                <td>{{ player_df['Bra'].values[0] }}</td>
+                <td>Balance</td>
+                <td>{{ player_df['Bal'].values[0] }}</td>
+            </tr>
+            <tr>
+                <td>Finishing</td>
+                <td>{{ player_df['Fin'].values[0] }}</td>
+                <td>Composure</td>
+                <td>{{ player_df['Cmp'].values[0] }}</td>
+                <td>Jumping Reach</td>
+                <td>{{ player_df['Jum'].values[0] }}</td>
+            </tr>
+            <tr>
+                <td>First Touch</td>
+                <td>{{ player_df['Fir'].values[0] }}</td>
+                <td>Concentration</td>
+                <td>{{ player_df['Cnt'].values[0] }}</td>
+                <td>Natural Fitness</td>
+                <td>x</td>
+            </tr>
+            <tr>
+                <td>Free kick taking</td>
+                <td>{{ player_df['Fre'].values[0] }}</td>
+                <td>Decisions</td>
+                <td>{{ player_df['Dec'].values[0] }}</td>
+                <td>Pace</td>
+                <td>{{ player_df['Pac'].values[0] }}</td>
+            </tr>
+            <tr>
+                <td>Heading</td>
+                <td>{{ player_df['Hea'].values[0] }}</td>
+                <td>Determination</td>
+                <td>{{ player_df['Det'].values[0] }}</td>
+                <td>Stamina</td>
+                <td>{{ player_df['Sta'].values[0] }}</td>
+            </tr>
+            <tr>
+                <td>Long Shots</td>
+                <td>{{ player_df['Lon'].values[0] }}</td>
+                <td>Flair</td>
+                <td>{{ player_df['Fla'].values[0] }}</td>
+                <td>Strength</td>
+                <td>{{ player_df['Str'].values[0] }}</td>
+            </tr>
+            <tr>
+                <td>Long Throw</td>
+                <td>{{ player_df['L Th'].values[0] }}</td>
+                <td>Leadership</td>
+                <td>{{ player_df['Ldr'].values[0] }}</td>
+                <td>Height</td>
+                <td>{{ player_df['Height'].values[0] }}</td>
+            </tr>
+            <tr>
+                <td>Marking</td>
+                <td>{{ player_df['Mar'].values[0] }}</td>
+                <td>Off the Ball</td>
+                <td>{{ player_df['OtB'].values[0] }}</td>
+                <td> </td>
+                <td> </td>
+            </tr>
+            <tr>
+                <td>Passing</td>
+                <td>{{ player_df['Pas'].values[0] }}</td>
+                <td>Positioning</td>
+                <td>{{ player_df['Pos'].values[0] }}</td>
+                <td> </td>
+                <td> </td>
+            </tr>
+            <tr>
+                <td>Penalty Taking</td>
+                <td>{{ player_df['Pen'].values[0] }}</td>
+                <td>Teamwork</td>
+                <td>{{ player_df['Tea'].values[0] }}</td>
+                <td> </td>
+                <td> </td>
+            </tr>
+            <tr>
+                <td>Tackling</td>
+                <td>{{ player_df['Tck'].values[0] }}</td>
+                <td>Vision</td>
+                <td>{{ player_df['Vis'].values[0] }}</td>
+                <td> </td>
+                <td> </td>
+            </tr>
+            <tr>
+                <td>Technique</td>
+                <td>{{ player_df['Tec'].values[0] }}</td>
+                <td>Work Rate</td>
+                <td>{{ player_df['Wor'].values[0] }}</td>
+                <td> </td>
+                <td> </td>
+            </tr>
+            <!-- Add more rows as needed -->
+        </tbody>
+    </table>
+
+    <!-- Add any additional scripts or CDN links here -->
