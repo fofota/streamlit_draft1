@@ -3,14 +3,22 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href='https://fonts.googleapis.com/css?family=Figtree' rel='stylesheet'>
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <title>{{ name }}'s Player Page</title>
         <!-- Add any additional styles or links to CDN here -->
     
         <!-- Dark Mode Styles -->
         <style>
+            .attribute {
+                font-weight: bold;
+                padding-left: 15px;
+                padding-right: 15px;
+            }
             body {
                 background-color: #343a40; /* Set default background color for dark mode */
                 color: #ffffff; /* Set default text color for dark mode */
+                font-family: Figtree;
             }
     
             a {
@@ -19,12 +27,34 @@
     
             /* Add more styles for dark mode as needed */
         </style>
+        <script>
+
+            $(document).ready(function() {
+                $('.attribute').each(function() {
+                   var value = $(this).text().split(" ");
+                   var number = parseInt(value[value.length - 1]);
+                   console.log(number);
+                   if (number >= 0 && number <= 5) {
+                        $(this).css('color', 'rgba(255,255,255,.6)');
+                    } else if (number <= 10) {
+                        $(this).css('color', 'white');
+                    } else if (number <= 15){
+                        $(this).css('color', 'yellow');
+                    } else {
+                        $(this).css('color', '#0bfb6b');
+                    }
+                   
+                });
+             });
+            
+        </script>
     </head>
 <body>
     <a href="{{ url_for('index') }}"> <<< Back to Squad Page</a>
     <h1>{{ name }}'s Player Page</h1>
     <p>Nationality: {{ player_df['Nat'].values[0] }}</p>
     <p>Age: {{ player_df['Age'].values[0] }}</p>
+    <p>Position: {{ player_df['Position'].values[0] }}</p>
     <p>Transfer Value: {{ player_df['Transfer Value'].values[0] }}</p>
     <p>Personality / Media Handling: {{ player_df['Personality'].values[0] }} / {{ player_df['Media Handling'].values[0] }}</p>
     <p>Left Foot / Right Foot: {{ player_df['Left Foot'].values[0] }} / {{ player_df['Right Foot'].values[0] }}</p>
@@ -32,6 +62,7 @@
     <p>Appearances / minutes: {{ player_df['Apps'].values[0] }} / {{ player_df['Mins'].values[0] }}</p>
     <p>Goals in season (and npXG per 90): {{ player_df['Gls'].values[0] }} ({{ player_df['NP-xG/90'].values[0] }})</p>
     <p>Assists in season (and xA per 90): {{ player_df['Ast'].values[0] }} ({{ player_df['xA/90'].values[0] }})</p>
+    {% if not player_df['Position'].values[0].startswith('GK'): %}
     <table class="table table-striped">
         <thead>
             <tr>
@@ -46,118 +77,246 @@
         <tbody>
             <tr>
                 <td>Corners</td>
-                <td>{{ player_df['Cor'].values[0] }}</td>
+                <td class = "attribute">{{ player_df['Cor'].values[0] }}</td>
                 <td>Aggression</td>
-                <td>{{ player_df['Agg'].values[0] }}</td>
+                <td class = "attribute">{{ player_df['Agg'].values[0] }}</td>
                 <td>Acceleration</td>
-                <td>{{ player_df['Acc'].values[0] }}</td>
+                <td class = "attribute">{{ player_df['Acc'].values[0] }}</td>
             </tr>
             <tr>
                 <td>Crossing</td>
-                <td>{{ player_df['Cro'].values[0] }}</td>
+                <td class = "attribute">{{ player_df['Cro'].values[0] }}</td>
                 <td>Anticipation</td>
-                <td>{{ player_df['Ant'].values[0] }}</td>
+                <td class = "attribute">{{ player_df['Ant'].values[0] }}</td>
                 <td>Agility</td>
-                <td>{{ player_df['Agi'].values[0] }}</td>
+                <td class = "attribute">{{ player_df['Agi'].values[0] }}</td>
             </tr>
             <tr>
                 <td>Dribbling</td>
-                <td>{{ player_df['Dri'].values[0] }}</td>
+                <td class = "attribute">{{ player_df['Dri'].values[0] }}</td>
                 <td>Bravery</td>
-                <td>{{ player_df['Bra'].values[0] }}</td>
+                <td class = "attribute">{{ player_df['Bra'].values[0] }}</td>
                 <td>Balance</td>
-                <td>{{ player_df['Bal'].values[0] }}</td>
+                <td class = "attribute">{{ player_df['Bal'].values[0] }}</td>
             </tr>
             <tr>
                 <td>Finishing</td>
-                <td>{{ player_df['Fin'].values[0] }}</td>
+                <td class = "attribute">{{ player_df['Fin'].values[0] }}</td>
                 <td>Composure</td>
-                <td>{{ player_df['Cmp'].values[0] }}</td>
+                <td class = "attribute">{{ player_df['Cmp'].values[0] }}</td>
                 <td>Jumping Reach</td>
-                <td>{{ player_df['Jum'].values[0] }}</td>
+                <td class = "attribute">{{ player_df['Jum'].values[0] }}</td>
             </tr>
             <tr>
                 <td>First Touch</td>
-                <td>{{ player_df['Fir'].values[0] }}</td>
+                <td class = "attribute">{{ player_df['Fir'].values[0] }}</td>
                 <td>Concentration</td>
-                <td>{{ player_df['Cnt'].values[0] }}</td>
+                <td class = "attribute">{{ player_df['Cnt'].values[0] }}</td>
                 <td>Natural Fitness</td>
                 <td>x</td>
             </tr>
             <tr>
-                <td>Free kick taking</td>
-                <td>{{ player_df['Fre'].values[0] }}</td>
+                <td>Free Kick Taking</td>
+                <td class = "attribute">{{ player_df['Fre'].values[0] }}</td>
                 <td>Decisions</td>
-                <td>{{ player_df['Dec'].values[0] }}</td>
+                <td class = "attribute">{{ player_df['Dec'].values[0] }}</td>
                 <td>Pace</td>
-                <td>{{ player_df['Pac'].values[0] }}</td>
+                <td class = "attribute">{{ player_df['Pac'].values[0] }}</td>
             </tr>
             <tr>
                 <td>Heading</td>
-                <td>{{ player_df['Hea'].values[0] }}</td>
+                <td class = "attribute">{{ player_df['Hea'].values[0] }}</td>
                 <td>Determination</td>
-                <td>{{ player_df['Det'].values[0] }}</td>
+                <td class = "attribute">{{ player_df['Det'].values[0] }}</td>
                 <td>Stamina</td>
-                <td>{{ player_df['Sta'].values[0] }}</td>
+                <td class = "attribute">{{ player_df['Sta'].values[0] }}</td>
             </tr>
             <tr>
                 <td>Long Shots</td>
-                <td>{{ player_df['Lon'].values[0] }}</td>
+                <td class = "attribute">{{ player_df['Lon'].values[0] }}</td>
                 <td>Flair</td>
-                <td>{{ player_df['Fla'].values[0] }}</td>
+                <td class = "attribute">{{ player_df['Fla'].values[0] }}</td>
                 <td>Strength</td>
-                <td>{{ player_df['Str'].values[0] }}</td>
+                <td class = "attribute">{{ player_df['Str'].values[0] }}</td>
             </tr>
             <tr>
-                <td>Long Throw</td>
-                <td>{{ player_df['L Th'].values[0] }}</td>
+                <td>Long Throws</td>
+                <td class = "attribute">{{ player_df['L Th'].values[0] }}</td>
                 <td>Leadership</td>
-                <td>{{ player_df['Ldr'].values[0] }}</td>
+                <td class = "attribute">{{ player_df['Ldr'].values[0] }}</td>
                 <td>Height</td>
-                <td>{{ player_df['Height'].values[0] }}</td>
+                <td class = "attribute">{{ player_df['Height'].values[0] }}</td>
             </tr>
             <tr>
                 <td>Marking</td>
-                <td>{{ player_df['Mar'].values[0] }}</td>
+                <td class = "attribute">{{ player_df['Mar'].values[0] }}</td>
                 <td>Off the Ball</td>
-                <td>{{ player_df['OtB'].values[0] }}</td>
+                <td class = "attribute">{{ player_df['OtB'].values[0] }}</td>
                 <td> </td>
                 <td> </td>
             </tr>
             <tr>
                 <td>Passing</td>
-                <td>{{ player_df['Pas'].values[0] }}</td>
+                <td class = "attribute">{{ player_df['Pas'].values[0] }}</td>
                 <td>Positioning</td>
-                <td>{{ player_df['Pos'].values[0] }}</td>
+                <td class = "attribute">{{ player_df['Pos'].values[0] }}</td>
                 <td> </td>
                 <td> </td>
             </tr>
             <tr>
                 <td>Penalty Taking</td>
-                <td>{{ player_df['Pen'].values[0] }}</td>
+                <td class = "attribute">{{ player_df['Pen'].values[0] }}</td>
                 <td>Teamwork</td>
-                <td>{{ player_df['Tea'].values[0] }}</td>
+                <td class = "attribute">{{ player_df['Tea'].values[0] }}</td>
                 <td> </td>
                 <td> </td>
             </tr>
             <tr>
                 <td>Tackling</td>
-                <td>{{ player_df['Tck'].values[0] }}</td>
+                <td class = "attribute">{{ player_df['Tck'].values[0] }}</td>
                 <td>Vision</td>
-                <td>{{ player_df['Vis'].values[0] }}</td>
+                <td class = "attribute">{{ player_df['Vis'].values[0] }}</td>
                 <td> </td>
                 <td> </td>
             </tr>
             <tr>
                 <td>Technique</td>
-                <td>{{ player_df['Tec'].values[0] }}</td>
+                <td class = "attribute">{{ player_df['Tec'].values[0] }}</td>
                 <td>Work Rate</td>
-                <td>{{ player_df['Wor'].values[0] }}</td>
+                <td class = "attribute">{{ player_df['Wor'].values[0] }}</td>
                 <td> </td>
                 <td> </td>
             </tr>
             <!-- Add more rows as needed -->
         </tbody>
     </table>
-
+    {% else %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Goalkeeping</th>
+                <th></th>
+                <th>Mental</th>
+                <th></th>
+                <th>Physical</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Aerial Reach</td>
+                <td class = "attribute">{{ player_df['Aer'].values[0] }}</td>
+                <td>Aggression</td>
+                <td class = "attribute">{{ player_df['Agg'].values[0] }}</td>
+                <td>Acceleration</td>
+                <td class = "attribute">{{ player_df['Acc'].values[0] }}</td>
+            </tr>
+            <tr>
+                <td>Command of Area</td>
+                <td class = "attribute">{{ player_df['Cmd'].values[0] }}</td>
+                <td>Anticipation</td>
+                <td class = "attribute">{{ player_df['Ant'].values[0] }}</td>
+                <td>Agility</td>
+                <td class = "attribute">{{ player_df['Agi'].values[0] }}</td>
+            </tr>
+            <tr>
+                <td>Communication</td>
+                <td class = "attribute">{{ player_df['Com'].values[0] }}</td>
+                <td>Bravery</td>
+                <td class = "attribute">{{ player_df['Bra'].values[0] }}</td>
+                <td>Balance</td>
+                <td class = "attribute">{{ player_df['Bal'].values[0] }}</td>
+            </tr>
+            <tr>
+                <td>Eccentricity</td>
+                <td>{{ 0 }}</td>
+                <td>Composure</td>
+                <td class = "attribute">{{ player_df['Cmp'].values[0] }}</td>
+                <td>Jumping Reach</td>
+                <td class = "attribute">{{ player_df['Jum'].values[0] }}</td>
+            </tr>
+            <tr>
+                <td>First Touch</td>
+                <td class = "attribute">{{ player_df['Fir'].values[0] }}</td>
+                <td>Concentration</td>
+                <td class = "attribute">{{ player_df['Cnt'].values[0] }}</td>
+                <td>Natural Fitness</td>
+                <td>x</td>
+            </tr>
+            <tr>
+                <td>Handling</td>
+                <td class = "attribute">{{ player_df['Han'].values[0] }}</td>
+                <td>Decisions</td>
+                <td class = "attribute">{{ player_df['Dec'].values[0] }}</td>
+                <td>Pace</td>
+                <td class = "attribute">{{ player_df['Pac'].values[0] }}</td>
+            </tr>
+            <tr>
+                <td>Kicking</td>
+                <td class = "attribute">{{ player_df['Kic'].values[0] }}</td>
+                <td>Determination</td>
+                <td class = "attribute">{{ player_df['Det'].values[0] }}</td>
+                <td>Stamina</td>
+                <td class = "attribute">{{ player_df['Sta'].values[0] }}</td>
+            </tr>
+            <tr>
+                <td>One on Ones</td>
+                <td class = "attribute">{{ player_df['1v1'].values[0] }}</td>
+                <td>Flair</td>
+                <td class = "attribute">{{ player_df['Fla'].values[0] }}</td>
+                <td>Strength</td>
+                <td class = "attribute">{{ player_df['Str'].values[0] }}</td>
+            </tr>
+            <tr>
+                <td>Passing</td>
+                <td class = "attribute">{{ player_df['Pas'].values[0] }}</td>
+                <td>Leadership</td>
+                <td class = "attribute">{{ player_df['Ldr'].values[0] }}</td>
+                <td>Height</td>
+                <td class = "attribute">{{ player_df['Height'].values[0] }}</td>
+            </tr>
+            <tr>
+                <td>Punching (Tendency)</td>
+                <td>{{ 0 }}</td>
+                <td>Off the Ball</td>
+                <td class = "attribute">{{ player_df['OtB'].values[0] }}</td>
+                <td> </td>
+                <td> </td>
+            </tr>
+            <tr>
+                <td>Reflexes</td>
+                <td class = "attribute">{{ player_df['Ref'].values[0] }}</td>
+                <td>Positioning</td>
+                <td class = "attribute">{{ player_df['Pos'].values[0] }}</td>
+                <td> </td>
+                <td> </td>
+            </tr>
+            <tr>
+                <td>Rushing Out (Tendency)</td>
+                <td>{{ 0 }}</td>
+                <td>Teamwork</td>
+                <td class = "attribute">{{ player_df['Tea'].values[0] }}</td>
+                <td> </td>
+                <td> </td>
+            </tr>
+            <tr>
+                <td>Throwing</td>
+                <td class = "attribute">{{ player_df['Thr'].values[0] }}</td>
+                <td>Vision</td>
+                <td class = "attribute">{{ player_df['Vis'].values[0] }}</td>
+                <td> </td>
+                <td> </td>
+            </tr>
+            <tr>
+                <td>Technique</td>
+                <td class = "attribute">{{ player_df['Tec'].values[0] }}</td>
+                <td>Work Rate</td>
+                <td class = "attribute">{{ player_df['Wor'].values[0] }}</td>
+                <td> </td>
+                <td> </td>
+            </tr>
+            <!-- Add more rows as needed -->
+        </tbody>
+    </table>
+    {% endif %}
     <!-- Add any additional scripts or CDN links here -->
