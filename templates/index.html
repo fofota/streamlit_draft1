@@ -13,7 +13,9 @@
         body {
             background-color: #343a40; /* Set default background color for dark mode */
             color: #ffffff; /* Set default text color for dark mode */
+           
         }
+
 
         a {
             color: #ADD8E6; /* Set link color in dark mode */
@@ -23,10 +25,10 @@
         body.dark-mode .table tbody tr {
             background-color: #495057;
         }
-
+        
         /* Add more styles for dark mode as needed */
     </style>
-
+    
 </head>
 <body>
     <div class="container mt-4">
@@ -81,7 +83,15 @@
         $(document).ready(function() {
             $('#playerTable').DataTable({
                 "pageLength": 50,  // Set the default number of rows per page
-                "lengthMenu": [50, 100, 200, 1000]  // Provide options for changing the number of rows per page
+                "lengthMenu": [50, 100, 200, 1000],  // Provide options for changing the number of rows per page
+                "columnDefs": [
+        { 
+            "targets": [], //first column / numbering column
+            "orderable": false, //set not orderable
+        },
+        ],
+        "order": [], //Initial no order.
+         "aaSorting": [],
             });
         });
     </script>
