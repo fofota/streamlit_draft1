@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href='https://fonts.googleapis.com/css?family=Figtree' rel='stylesheet'>
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-        <title>{{ name }}'s Player Page</title>
+        <title>{{ name }}</title>
         <!-- Add any additional styles or links to CDN here -->
     
         <!-- Dark Mode Styles -->
@@ -15,16 +15,47 @@
                 padding-left: 15px;
                 padding-right: 15px;
             }
+            
             body {
                 background-color: #343a40; /* Set default background color for dark mode */
                 color: #ffffff; /* Set default text color for dark mode */
                 font-family: Figtree;
+                margin: 0; /* Remove default margin */
+                display: flex;
+                flex-direction: column;
+                align-items: center; /* Center the content horizontally */
+                justify-content: center; /* Center the content vertically */
             }
     
             a {
                 color: #ADD8E6; /* Set link color in dark mode */
             }
-    
+   
+            .content-container {
+                display: flex;
+                max-width: 1800px; /* Set a maximum width for the container */
+            }
+
+            .text-column {
+                flex: 1; /* Allow text to take up available space */
+                max-width: 600px; /* Set a maximum width for the text column */
+                padding-right: 40px; /* Add spacing between columns */
+                text-align: left; /* Align text to the left */
+            }
+
+            .table-container {
+                flex: 1; /* Allow table to take up available space */
+            }
+
+            .table-container .attributename {
+               min-width: 120px; /* Adjust the width as needed */
+            }
+
+            table.dark-table {
+                background-color: #212529 !important; /* Set the background color for the table */
+                color: #ffffff; /* Set the text color for the table */
+            }
+
             /* Add more styles for dark mode as needed */
         </style>
         <script>
@@ -51,7 +82,9 @@
     </head>
 <body>
     <a href="{{ url_for('index') }}"> <<< Back to Squad Page</a>
-    <h1>{{ name }}'s Player Page</h1>
+    <h1>{{ name }}</h1>
+    <div class="content-container">
+    <div class="text-column">
     <p>Nationality: {{ player_df['Nat'].values[0] }}</p>
     <p>Age: {{ player_df['Age'].values[0] }}</p>
     <p>Position: {{ player_df['Position'].values[0] }}</p>
@@ -62,15 +95,17 @@
     <p>Appearances / minutes: {{ player_df['Apps'].values[0] }} / {{ player_df['Mins'].values[0] }}</p>
     <p>Goals in season (and npXG per 90): {{ player_df['Gls'].values[0] }} ({{ player_df['NP-xG/90'].values[0] }})</p>
     <p>Assists in season (and xA per 90): {{ player_df['Ast'].values[0] }} ({{ player_df['xA/90'].values[0] }})</p>
+    </div>
     {% if not player_df['Position'].values[0].startswith('GK'): %}
-    <table class="table table-striped">
-        <thead>
+    <div class="table-container">
+        <table class="dark-table">
+            <thead>
             <tr>
-                <th>Technical</th>
+                <th class="attributename">Technical</th>
                 <th></th>
-                <th>Mental</th>
+                <th class="attributename">Mental</th>
                 <th></th>
-                <th>Physical</th>
+                <th class="attributename">Physical</th>
                 <th></th>
             </tr>
         </thead>
@@ -113,7 +148,7 @@
                 <td>Concentration</td>
                 <td class = "attribute">{{ player_df['Cnt'].values[0] }}</td>
                 <td>Natural Fitness</td>
-                <td>x</td>
+                <td> </td>
             </tr>
             <tr>
                 <td>Free Kick Taking</td>
@@ -190,15 +225,17 @@
             <!-- Add more rows as needed -->
         </tbody>
     </table>
+    </div>
     {% else %}
-    <table class="table table-striped">
+    <div class="table-container">
+    <table class="dark-table">
         <thead>
             <tr>
-                <th>Goalkeeping</th>
+                <th class="attributename">Goalkeeping</th>
                 <th></th>
-                <th>Mental</th>
+                <th class="attributename">Mental</th>
                 <th></th>
-                <th>Physical</th>
+                <th class="attributename">Physical</th>
                 <th></th>
             </tr>
         </thead>
@@ -229,7 +266,7 @@
             </tr>
             <tr>
                 <td>Eccentricity</td>
-                <td>{{ 0 }}</td>
+                <td class = "attribute">{{ player_df['Ecc'].values[0] }}</td>
                 <td>Composure</td>
                 <td class = "attribute">{{ player_df['Cmp'].values[0] }}</td>
                 <td>Jumping Reach</td>
@@ -241,7 +278,7 @@
                 <td>Concentration</td>
                 <td class = "attribute">{{ player_df['Cnt'].values[0] }}</td>
                 <td>Natural Fitness</td>
-                <td>x</td>
+                <td> </td>
             </tr>
             <tr>
                 <td>Handling</td>
@@ -277,7 +314,7 @@
             </tr>
             <tr>
                 <td>Punching (Tendency)</td>
-                <td>{{ 0 }}</td>
+                <td class = "attribute">{{ player_df['Pun'].values[0] }}</td>
                 <td>Off the Ball</td>
                 <td class = "attribute">{{ player_df['OtB'].values[0] }}</td>
                 <td> </td>
@@ -293,7 +330,7 @@
             </tr>
             <tr>
                 <td>Rushing Out (Tendency)</td>
-                <td>{{ 0 }}</td>
+                <td class = "attribute">{{ player_df['TRO'].values[0] }}</td>
                 <td>Teamwork</td>
                 <td class = "attribute">{{ player_df['Tea'].values[0] }}</td>
                 <td> </td>
@@ -318,5 +355,9 @@
             <!-- Add more rows as needed -->
         </tbody>
     </table>
+    </div>
     {% endif %}
+    </div>  
+</body>
+</html>
     <!-- Add any additional scripts or CDN links here -->

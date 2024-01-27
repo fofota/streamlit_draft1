@@ -36,6 +36,10 @@ def index():
     selected_columns = ['MappedPosition','Inf', 'Name', 'Age', 'Wage', 'Transfer Value', 'Nat', 'Position', 'Personality', 'Av Rat', 'Mins', 'Gls', 'Ast', 'NP-xG/90', 'xA/90']
     df = full_df[selected_columns]
 
+    # Replace NaN values in the 'Inf' and personality columns with an empty string
+    df['Inf'] = df['Inf'].fillna('')
+    df['Personality'] = df['Personality'].fillna('')
+
     return render_template('index.html', table=df.sort_values(by='MappedPosition'))
 
 @app.route('/player/<name>')
