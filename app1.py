@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup
 # Function to parse HTML table into a DataFrame
 def parse_html_table(html_content):
     # Replacing the first nat to Nationality, and the second one to NFi (Natural Fitness)
+    html_content = html_content.decode('utf-8')  # Convert bytes to string 
     html_content = html_content.replace('<th>Nat</th>', '<th>Nationality</th>', 1)
     html_content = html_content.replace('<th>Nat</th>', '<th>NFi</th>')
     soup = BeautifulSoup(html_content, 'html.parser')
