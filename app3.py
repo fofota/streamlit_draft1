@@ -33,7 +33,7 @@ def index():
     # Sort the DataFrame by 'MappedPosition'
     
     # Select specific columns
-    selected_columns = ['MappedPosition','Inf', 'Name', 'Age', 'Wage', 'Transfer Value', 'Nat', 'Position', 'Personality', 'Av Rat', 'Mins', 'Gls', 'Ast', 'NP-xG/90', 'xA/90']
+    selected_columns = ['MappedPosition','Inf', 'Name', 'Age', 'Wage', 'Transfer Value', 'Nationality', 'Position', 'Personality', 'Av Rat', 'Mins', 'Gls', 'Ast', 'NP-xG/90', 'xA/90']
     df = full_df[selected_columns]
 
     # Replace NaN values in the 'Inf' and personality columns with an empty string
